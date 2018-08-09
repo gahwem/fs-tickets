@@ -1,0 +1,13 @@
+<h1>Bienvenue sur le site de réservations de FriScènes</h1>
+
+{% if all_events %}
+
+<ul>
+    {% for event in all_events %}
+    <li>{{event}}</li>
+    {% endfor %}
+
+    {% else %}
+    <p>Aucun billet disponible</p>
+    {% endif %}
+</ul>

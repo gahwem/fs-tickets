@@ -1,0 +1,60 @@
+{% extends 'fritickets/base.html' %}
+{% block content %}
+
+        {% if bundles %}
+        <h2 class="datetag">Offres</h2>
+
+
+        <div class="columns"> 
+        {% for bundle in bundles%}
+        
+        
+        
+        <div class="column">
+        <div id="content" class="box eventbox is-flex" style="background-color:lightcoral">
+        
+                <strong>{{ bundle.name }}</strong></br>
+                {{ bundle.description}}</br>
+        </div>
+        
+        </div>
+        {% endfor %}
+        
+        
+        </div>
+        {% endif %}
+
+{% for dateCalendar in eventCalendar %}
+<h2 class="datetag">{{dateCalendar.date |date:"l d F Y"}}</h2>
+
+
+<div class="columns"> 
+{% for event in dateCalendar.events %}
+
+
+
+<div class="column">
+    {% if event.seatsLeft > 0 %}
+        <a href="/detail/{{event.id}}">
+    {% endif %}
+<div id="content" class="box eventbox event_{{event.id}}" style="background-color:{{event.show.category.csscolor}}">
+        {% if event.seatsLeft <= 0 %}
+        <div class="ribbon"><span>Complet</span></div>
+        {% endif %}
+        <strong>{{ event.show.title }}</strong></br>
+        {{ event.schedule }}</br>
+        libre : {{ event.seatsLeft }}</br>
+</div>
+{% if event.seatsLeft > 0 %}
+</a>
+{% endif %}
+</div>
+{% endfor %}
+
+
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

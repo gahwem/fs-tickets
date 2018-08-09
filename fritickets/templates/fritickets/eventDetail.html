@@ -1,0 +1,62 @@
+
+
+
+
+{% extends 'fritickets/base.html' %}
+{% block content %}
+
+
+
+
+
+<form method="POST" class="post-form">
+    {% csrf_token %}
+
+
+    {% if form.errors %}
+    <div class = "notification is-danger">
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+
+
+   <div class="columns">
+
+
+    {%for field in form.getTarifs %}
+    <div class="column">
+            <div class="box has-text-centered" style="background-color:pink">
+                    <h2 style="color:black;">{{ field.field.label }} </h2>
+                <div class="select">
+                    {{ field }}
+            
+                </div>
+                 </div>
+    </div>
+
+    {% endfor %}
+    </div>
+
+    <div class="columns has-text-centered">
+    <div class="column">
+    <a href="/events" class="button is-danger is-large">Annuler</a>
+    </div>
+    <div class="column">
+    <button type="submit" class="save button is-success is-large">Ajouter au panier</button>
+    </div>
+
+</div>
+</form>
+
+{% endblock %}
