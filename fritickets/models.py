@@ -111,7 +111,7 @@ class Booking(models.Model):
         return "réservations pour " + __str__(self.person)
 
 class Cart(models.Model):
-    sessionKey = models.CharField(max_length=30)
+    sessionKey = models.CharField(max_length=200)
     eventTickets = models.ManyToManyField(EventTicket)
 
     def __str__(self):
